@@ -1,0 +1,151 @@
+const Model =  require('./model');
+
+/**Toda la logica de almacenamiento
+ * Vamos a crear un mock
+ * ¿Pero por qué primero vamos a crear un mock?
+ * Porque la parte de base de datos es compleja
+ * todas las opciones son muchas y complejas
+ * entonces primero debo entender lo que pasa
+ * y cuál es la responsabilidad unica de la capa de datos
+ * 
+ * Vamos a pensar:
+ * lo que tenemos es una lista de mensajes que se
+ * van a ir guardadando
+ * 
+
+ */
+/**Este es un array donde vamos
+ * aguardar nuestros mensajes
+ * Y vamos a necesitar una funcion para añadir
+ * un mensaje que lo va a recibir
+ */
+
+//const list = []
+
+/**const db = require('mongoose');
+ * este mongoose me lo voy a llevar a db.js
+ * y toda la información sobre la conexión
+*/
+const { updateMessages } = require('./controller');
+
+
+//conexión
+//hacer la conexión. Una buena practica es pedirle que utilice el nuevo parser de mongodb
+/**db.Promise = global.Promise Global es un objeto
+especifico de JS, NODE.JS que nos va a permitir al scope global
+Dentro del scope global vamos a tener la clase Promise que es una
+clase nativa de JS y vamos a poder decirle:
+oye, mongoose, cuando quieres ocupar una 
+promesa utiliza esta
+ 
+db.connect('mongodb+srv://user:123user@cluster0.m0dfs.mongodb.net/db?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    **Vamos asegurarno de que no
+     * haya problemas de compatibilidad 
+     * en caso de que el servidor sea más nuevo o antiguo
+     
+})
+/**Otra buena practica que podemos hacer
+ * es en vez de utilizar los callbacks por defector
+ * es pedirle a mongoose que utilice las promesas
+ * para poder resolver de forma mucho
+ * más simple
+ 
+console.log('[db] Conectada con exito')*/
+
+/**Tenemos que hacer la conexion con la BD 
+ * No tenemos ningun tipo de servidor de BD
+ * pero np hay problema, pero hay un servidor
+ * llamado mlab (creo que ya cambió a atlas de)
+*/
+
+//Añadir mensaje es solo JS oara trabajar dentro de un servidor
+function addMessage(message){
+   // list.push(message)
+const myMessage = new Model(message)
+myMessage.save()
+    /**Cómo añadimos
+ * cualquier tipo de información a Mongoose?
+ * Lo que hacemos es utilizar el 
+ * el modelo
+ * Nuevo modelo del mensaje que nos viene
+ * y vamos a instanciar una nueva clase de 
+ * este modelo: myMessage.save()
+ * y con esto ya está añadido
+ * Pero al usuario no le podemos decir
+ * que se vaya a insomnia para que vea su mensaje,
+ * entonces lo tenemos que devolver desde la api
+ * Vamos a convertir nuestra funcion 
+ * getMessages en una funcion asincrona
+ * y en lugar de devolver una lista, vamos a
+ * empezar con el await
+ */
+}
+
+
+async function getMessages(filterUser){
+    //return list;
+    /**Ahora, cuando hagamos el find, 
+     * definir si tenemos que pasar el filter user o no
+     * Si el filterUser es diferente o nulo, entonces
+     * tendremos que crear el filtro de mongoDB
+     * En caso contrario no lo tenemos que crear
+     * con un let vamos a crear el filtro por defecto
+     */
+    let filter = {}
+    if (filterUser !== null){
+        filter = {user: filterUser}
+    }
+  const messages =  await Model.find(filter) //pedir todos los documentos
+  return messages
+  /**Con esto, mongoDB va a entender que solo quiero que me traiga
+   * a los usuarios que solamente coincidan con filter
+   */
+}
+
+async function updateText(id, message){
+    /**venirnos al modelo para poder modificar uno
+     * ¿Qué vamos hacer para modificar uno?
+     * 
+     * Primero vamos hacer findAlone porque lo que
+     * queremos es encontrar uno pero vamos
+     * a decirle ques es lo que queremos hacer
+     * parametros a buscar _id
+     */         
+     const foundMessage = await Model.findOne({
+         _id: id /** /**lo que nos interesa es que el id sea igual al id que nos venga 
+         esta parte va a ir a nuestra base de
+         datos MongoDb, va a ver el modelo que hemos
+         creado todos los registros y va a agarrar el que tenga
+         el id que nos ha venido desde la url */
+     })
+     foundMessage.message = message
+     /**Para devolverlo */
+     const newMessage = await foundMessage.save()
+     return newMessage
+      /**foundmessage es igual al mensaje que nos viene 
+      * message es el texto que sea, es decir el que vamos a recibir
+     */
+    }
+
+/**Para ver solo */
+//exportar exportar funciones
+
+function removeMessage(id){
+    Model.deleteOne({
+        _id: id
+    })
+}
+
+//una buena practica es llamar nuestras funciones igual
+module.exports = {
+   add: addMessage,
+   list: getMessages,
+   updateText: updateText,
+   remove: removeMessage
+   //get: obtener un mensaje especifico
+   //update: actualizar un mensaje especifico
+   //delete: borrar un mensaje especifico
+}
+
+/*Ahora lo exportamos a controlller.js */
