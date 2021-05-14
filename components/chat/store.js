@@ -1,32 +1,32 @@
 const Model = require('./model')
 
-    //crear chat y recibir un array de usuarios
-function createChat(chat){
-     const newChat = new Model(chat)
-     return newChat.save()
+// crear chat y recibir un array de usuarios
+function createChat (chat) {
+  const newChat = new Model(chat)
+  return newChat.save()
 }
 
-    //listar chats
-async function chatList(userId){
-        return new Promise((resolve, reject) => {
-            let filter = {};
-            if (userId !== null) {
-                filter = { users: userId };
-            }
-            Model.find(filter)
-                .populate('users')
-                .exec((error, populated) => {
-                    if (error) {
-                        reject(error);
-                        return false;
-                    }
-    
-                    resolve(populated);
-                });
-        })
+// listar chats
+async function chatList (userId) {
+  return new Promise((resolve, reject) => {
+    let filter = {}
+    if (userId !== null) {
+      filter = { users: userId }
     }
+    Model.find(filter)
+      .populate('users')
+      .exec((error, populated) => {
+        if (error) {
+          reject(error)
+          return false
+        }
 
-    module.exports ={
-        create: createChat,
-        list: chatList,
-    }
+        resolve(populated)
+      })
+  })
+}
+
+module.exports = {
+  create: createChat,
+  list: chatList
+}
