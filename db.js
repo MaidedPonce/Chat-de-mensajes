@@ -1,5 +1,3 @@
-/** Va a tener toda la información para gestionar la conexión */
-
 const db = require('mongoose')
 
 db.Promise = global.Promise

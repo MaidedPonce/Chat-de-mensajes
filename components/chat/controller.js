@@ -6,16 +6,15 @@ function chatList (userId) {
 
 function createChat (users) {
   if (!users || !Array.isArray(users)) {
-    return Promise.reject('No hay ningún chat por el momento') /**Si el usuario es un array */
+    return Promise.reject('No hay ningún chat por el momento') /** Si el usuario es un array */
   }
   const chat = {
     users: users
   }
-  return store.add(chat)
+  return store.create(chat)
 }
 
 module.exports = {
   chatList,
   createChat
 }
-

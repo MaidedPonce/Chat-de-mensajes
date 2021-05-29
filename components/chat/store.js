@@ -7,7 +7,7 @@ function createChat (chat) {
 }
 
 // listar chats
-async function chatList (userId) {
+function chatList (userId) {
   return new Promise((resolve, reject) => {
     let filter = {}
     if (userId !== null) {
