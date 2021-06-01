@@ -1,0 +1,25 @@
+{
+  "name": "backendnode",
+  "version": "0.1.0",
+  "description": "Un como telegram pero mucho mejor",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": [
+    "chat",
+    "telegram",
+    "server"
+  ],
+  "author": "\"Maided Ponce\"",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.7",
+    "multer": "^1.4.2",
+    "socket.io": "^2.3.0"
+  }
+}
