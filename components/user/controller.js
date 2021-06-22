@@ -1,12 +1,21 @@
+const bcrypt = require('bcryptjs')
 const store = require('./store')
 
-function addUser (name) {
-  if (!name) {
+async function addUser (name, email, password) {
+  /** if (!name) {
     return Promise.reject('Invalid name')
-  }
+  }**/
+  const hashed = await bcrypt.hash(password, 10)
+
   const user = {
-    name
+    name: name,
+    email: email,
+    password: hashed
   }
+  if (!user) {
+    return ('No hay usuario, ksjsj')
+  }
+  console.log(user)
   return store.add(user)
 }
 

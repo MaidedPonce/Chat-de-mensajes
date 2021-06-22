@@ -4,7 +4,7 @@ const controller = require('./controller')
 const router = express.Router()
 
 router.post('/', function (req, res) {
-  controller.addUser(req.body.name)
+  controller.addUser(req.body.name, req.body.email, req.body.password)
     /** En caso de que todo vaya bien vamos a ver qué data nos vendrá */
     .then(data => {
       response.succes(req, res, data, 201)
