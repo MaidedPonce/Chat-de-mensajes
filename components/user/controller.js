@@ -13,9 +13,8 @@ async function addUser (name, email, password) {
     password: hashed
   }
   if (!user) {
-    return ('No hay usuario, ksjsj')
+    return ('Es necesario ingresar sus datos')
   }
-  console.log(user)
   return store.add(user)
 }
 
