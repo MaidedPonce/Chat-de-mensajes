@@ -45,16 +45,16 @@ router.post('/sign-in', function (req, res, next) {
       next(err)
     }
   })
-  controller.addUser(req.body.name, req.body.email, req.body.password)
-    /** En caso de que todo vaya bien vamos a ver qué data nos vendrá */
-    .then(data => {
-      response.succes(req, res, data, 201)
-    })
-    .catch(err => {
-      response.error(req, res, 'Internal error', 500, err)
-    })
 })
-
+ router.post('/sign-up', function (req, res) {
+   controller.addUser(req.body.name, req.body.email, req.body.password)
+   .then(data => {
+    response.succes(req, res, data, 201)
+   })
+   .catch(err => {
+     response.err(req, res, 'Internal Error', 500, err)
+   })
+ })
 router.get('/', function (req, res) {
   controller.listAllUsers()
     .then((users) => {
