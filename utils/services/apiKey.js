@@ -1,4 +1,4 @@
-const MongoLib = require('../../lib/mongo/mongo')
+const MongoLib = require('../../lib/mongo')
 
 class getApiKey {
   constructor () {
@@ -8,6 +8,7 @@ class getApiKey {
 
   async getApyKey ({ token }) {
     const [apiKey] = await this.mongoDb.getAll(this.collection, { token })
+    //console.log(apiKey)
     return apiKey
   }
 }

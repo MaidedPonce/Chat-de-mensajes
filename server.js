@@ -1,23 +1,24 @@
 const express = require('express')
-const db = require('./db')
 const app = express()
 const server = new (require('http').Server)(app)
-const { config } = require('./config')
+const passport = require('passport');
 const cors = require('cors')
-const bodyParser = require('body-parser')
 const socket = require('./socket')
-// const db = require('./db')
-const router = require('./network/routes')
-db(config.dbUrl)
-app.use(cors())
+const { config } = require('./config')
+const users = require('./components/user/network')
+const chats = require('./components/chat/netwok')
+socket.connect(server)
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.json())
-
-// app.use('/app', express.static('public'))
 app.use('/app', express.static('public'))
+app.use(express.json())
+app.use(cors())
+app.use(passport.initialize());
+// app.use(passport.authenticate());
+// app.use(passport.session());
+users(app)
+chats(app)
+// app.use('/app', express.static('public'))
 
-router(app)
 // http://localhost:3000/message?error=ok
 /* app.get('/message', function (req, res) {
   if (req.query.error == 'ok') {
@@ -26,8 +27,6 @@ router(app)
     response.succes(req, res, 'Creado correctamente', 201)
   }
 }) */
-
-socket.connect(server)
 
 server.listen(config.port, function () {
   console.log('La app está escuchando en' + config.host + ':' + config.port)

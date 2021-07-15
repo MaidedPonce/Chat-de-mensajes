@@ -9,12 +9,12 @@ const users = [
   {
     name: 'Jose Maria',
     email: 'jose@undefined.sh',
-    password: 'config.defaultUserPassword'
+    password: config.defaultUserPassword
   },
   {
     name: 'Maria Jose',
     email: 'maria@undefined.sh',
-    password: 'config.defaultUserPassword'
+    password: config.defaultUserPassword
   }
 ]
 async function createUser (mongoDB, user) {
