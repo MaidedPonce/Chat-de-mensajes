@@ -5,3 +5,8 @@ body {
     background-color: blueviolet;
     font-family: $theme-font;
 }
+
+#app {
+    display: grid;
+    grid-template: repeat(6, 104px)/repeat(3, 33.3%)
+}

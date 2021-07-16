@@ -1,0 +1,28 @@
+.header {
+    background-color: #4f575773;
+    display: grid;
+    grid-column: 1/4;
+}
+
+.header__el--img {
+    display: flex;
+    width: 100px;
+    height: 80px;
+    margin: 10px;
+}
+
+.header__el--img img {
+    width: 80px;
+}
+
+.header__el {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+    align-items: center;
+}
+
+.header__el--ses p:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

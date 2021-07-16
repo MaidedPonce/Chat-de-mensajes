@@ -1,6 +1,10 @@
 import React from 'react';
+import Header from '../components/Header'
 import '../assets/styles/Login.scss'
+
 const Login = () => (
+    <>
+    <Header />
     <section className="login">
         <section className="login__container">
            <h3>Iniciar sesión</h3>
@@ -17,6 +21,7 @@ const Login = () => (
            </form> 
         </section>
     </section>
+    </>
 )
 
 export default Login;

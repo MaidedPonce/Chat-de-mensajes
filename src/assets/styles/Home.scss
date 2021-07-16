@@ -1,0 +1,27 @@
+.area {
+    background: #00ffff57;
+    width: 500px;
+    height: 400px;
+    margin: 30px;
+}
+
+.area__sub {
+    display: flex;
+    flex-direction: column;
+}
+
+.botton {
+    display: grid;
+    grid-row: 3/5;
+    grid-column: 3/4;
+    height: 50px;
+    align-items: center;
+}
+
+.botton__container--btn {
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    border: 1px solid;
+    box-shadow: 2px 2px 7px 1px rgb(95, 241, 255);
+}
