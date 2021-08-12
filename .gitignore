@@ -1,5 +1,5 @@
 # Node template
-
+node_modules
 # Logs
 logs
 *.log
@@ -71,3 +71,7 @@ typings/
 # Docs Custom
 .cache/
 yarn-error.log
+
+dist/
+
+src/server/public
